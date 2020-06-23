@@ -7,6 +7,8 @@ const client = new Client();
 const token = ""
 const generalId = "724764172100960270"
 
+let commands = ["help, time, valeu, ping, repete"];
+
 client.on('ready', () => {
     console.log("Conectado como " + client.user.tag)
 
@@ -33,19 +35,6 @@ client.on('message', receivedMessage => {
     if (receivedMessage.content.startsWith("!")) {
         processCommand(receivedMessage);
     };
-
-    if (receivedMessage.content == "!repete") {
-        receivedMessage.channel.send("Ei boy, " + receivedMessage.author.toString() + "!   Tu falou: " + receivedMessage.content);
-    }
-
-    if (receivedMessage.content == "valeu") {
-        receivedMessage.react("👍");
-    }
-
-    if (receivedMessage.content == "!ping") {
-        receivedMessage.reply('pong (Reply)');
-    }
-
 });
 
 function processCommand(receivedMessage) {
@@ -58,13 +47,21 @@ function processCommand(receivedMessage) {
         helpCommand(arguments, receivedMessage);
     } else if (primaryCommand == "time") {
         receivedMessage.channel.send("O horário atual é: "+ dataHoraAtual());
+    } else if(primaryCommand == "repete"){
+        receivedMessage.channel.send("Ei boy, " + receivedMessage.author.toString() + "!   Tu falou: " + receivedMessage.content);
+    } else if(primaryCommand == "valeu"){
+        receivedMessage.react("👍");
+    } else if(primaryCommand == "ping"){
+        receivedMessage.reply('pong');
+    }else if (primaryCommand != ""){
+        receivedMessage.channel.send("Digita `!help` se você precisar ver os comandos");
     }
 }
 
 
 function helpCommand(arguments, receivedMessage) {
     if (arguments.length == 0) {
-        receivedMessage.channel.send("Eu não entendi não, digita `!help [Algo]` se tu precisar de ajuda");
+        receivedMessage.channel.send("Esses são os nosso comandos:\n`[" + commands+"]`");
     } else {
         receivedMessage.channel.send("Parece que tu precisa de ajuda com " + arguments);
     }
