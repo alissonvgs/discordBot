@@ -2,7 +2,9 @@
 const { Client, MessageAttachment } = require('discord.js');
 const client = new Client();
 
-const token = "NzI0NzY0NTIxODQ3MDYyNjM5.XvE9tA.hN5tJGpV559725WtKmsWPkq3Kyc"
+//Lembrar de tirar o token antes do PUSH
+//Pegar o token no https://discord.com/developers/applications
+const token = ""
 const generalId = "724764172100960270"
 
 client.on('ready', () => {
