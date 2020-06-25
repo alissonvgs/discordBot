@@ -1,0 +1,25 @@
+client.on('message', message => {
+    let args = message.content.substring(prefix.length).split(" ");
+
+    switch (args[0]) {
+        case "play":
+            if (!args[1]) {
+                message.channel.send("Você precisa adicionar um link!");
+            }
+            if (!message.member.voiceChannel) {
+                message.channel.send("Você precisa estar em um canal!");
+            }
+
+            if (!servers[message.guild.id]) servers[message.guild.id] = {
+                queue: []
+            }
+
+            var server = servers[message.guild.id];
+
+            if (!message.guild.voice.connection) channel.join().then(function (connection) {
+                play(connection, message);
+            });
+
+            break;
+    }
+})
